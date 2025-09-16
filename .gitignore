@@ -1,0 +1,8 @@
+Insumos/
+__pycache__/
+.vscode/
+*.xlsx
+*.csv
+*.mkv
+!python-3.12.5-emb.zip
+python-3.12.5-emb/

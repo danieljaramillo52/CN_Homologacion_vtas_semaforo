@@ -1,0 +1,15 @@
+2025-09-16 15:20:34.859 | INFO     | Utils.DataQuality_Functions:resolve_existing_file:79 - Archivo ventas_neveras_conservacion_formulas.xlsx encontrado.
+2025-09-16 15:20:34.860 | INFO     | Utils.general_functions:Lectura_insumos_excel:77 - Inicio lectura ventas_neveras_conservacion_formulas.xlsx Hoja: Informe 1
+2025-09-16 15:20:40.026 | SUCCESS  | Utils.general_functions:Lectura_insumos_excel:88 - Lectura de ventas_neveras_conservacion_formulas.xlsx,  hoja: Informe 1 realizada con éxito
+2025-09-16 15:20:40.026 | INFO     | Utils.general_functions:wrapper:15 - Tiempo de ejecución de Lectura_insumos_excel: 5.165547847747803 segundos
+2025-09-16 15:20:40.027 | INFO     | Utils.general_functions:Lectura_insumos_excel:77 - Inicio lectura ventas_neveras_conservacion_formulas.xlsx Hoja: DRIVERS
+2025-09-16 15:20:45.525 | SUCCESS  | Utils.general_functions:Lectura_insumos_excel:88 - Lectura de ventas_neveras_conservacion_formulas.xlsx,  hoja: DRIVERS realizada con éxito
+2025-09-16 15:20:45.526 | INFO     | Utils.general_functions:wrapper:15 - Tiempo de ejecución de Lectura_insumos_excel: 5.497947692871094 segundos
+2025-09-16 15:20:45.526 | SUCCESS  | Utils.DataQuality_Functions:verificar_columnas:105 - ✅ Informe 1: todas las columnas esperadas están presentes.
+2025-09-16 15:20:45.526 | SUCCESS  | Utils.DataQuality_Functions:verificar_columnas:105 - ✅ DRIVERS: todas las columnas esperadas están presentes.
+2025-09-16 15:20:45.526 | INFO     | Utils.general_functions:Lectura_insumos_excel:77 - Inicio lectura ventas_neveras_conservacion_formulas.xlsx Hoja: Informe 1
+2025-09-16 15:21:00.964 | SUCCESS  | Utils.general_functions:Lectura_insumos_excel:88 - Lectura de ventas_neveras_conservacion_formulas.xlsx,  hoja: Informe 1 realizada con éxito
+2025-09-16 15:21:00.964 | INFO     | Utils.general_functions:wrapper:15 - Tiempo de ejecución de Lectura_insumos_excel: 15.438220500946045 segundos
+2025-09-16 15:21:00.965 | INFO     | Utils.general_functions:Lectura_insumos_excel:77 - Inicio lectura ventas_neveras_conservacion_formulas.xlsx Hoja: DRIVERS
+2025-09-16 15:21:15.826 | SUCCESS  | Utils.general_functions:Lectura_insumos_excel:88 - Lectura de ventas_neveras_conservacion_formulas.xlsx,  hoja: DRIVERS realizada con éxito
+2025-09-16 15:21:15.826 | INFO     | Utils.general_functions:wrapper:15 - Tiempo de ejecución de Lectura_insumos_excel: 14.86070203781128 segundos

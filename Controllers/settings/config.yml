@@ -1,0 +1,52 @@
+
+
+# Configuración base de la aplicación.
+
+cnf_mensajes:
+  msg_base1: ""
+
+config_insumos:
+  path_insumos: "Insumos/"
+  nom_base: "ventas_neveras_conservacion_formulas.xlsx"
+  base_vtas: 
+    nom_hoja_vtas: "Informe 1"
+    cols_vtas: &cols_vtas
+      anio_mes: "Año/Mes"
+      tipo_venta: "Tipo de Venta"
+      oficina_ventas: "Oficina de ventas"
+      cliente_clave: "Cliente - Clave"
+      cliente: "Cliente"
+      codigo_ecom: "Código ECOM"
+      agente_comercial_clave: "Agente Comercial - Clave"
+      agente_comercial: "Agente Comercial"
+      venta_dinero: "Venta $"
+      venta_kg: "Venta KG"
+      venta_un: "Venta UN"
+      status: "STATUS"
+      cod_ecom_final: "COD ECOM FINAL"
+      cod_ac_final: "COD AC FINAL"
+      nombre_ac_final: "NOMBRE AC FINAL"
+  drivers: 
+    nom_hoja_driver: DRIVERS
+    cols_drivers: &cols_drivers
+      regional: "Regional"
+      cod_sap: "Cod SAP"
+      nom_agente_comercial: "Nombre Agente Comercial"
+      cambio_cod_ecom_crm: "Cambio Cod ECOM a CRM"
+      mes: "Mes"
+      cod_cliente: "Cod Cliente"
+      cod_actual: "Cod Actual"
+      cod_jefe_ventas: "Cód. Jefe de Ventas"
+      jefe_ventas: "Jefe de Ventas"
+      cod_cliente_alt: "Cod Cliente.1"
+      concat: "CONCAT"
+
+
+dict_cols:
+  cols_ventas: *cols_vtas
+  cols_drivers: *cols_drivers
+  
+
+Resultados:
+  path_resultado: "Resultados\\"
+
