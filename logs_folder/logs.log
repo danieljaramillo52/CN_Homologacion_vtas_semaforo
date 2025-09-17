@@ -1,15 +1,34 @@
-2025-09-16 15:20:34.859 | INFO     | Utils.DataQuality_Functions:resolve_existing_file:79 - Archivo ventas_neveras_conservacion_formulas.xlsx encontrado.
-2025-09-16 15:20:34.860 | INFO     | Utils.general_functions:Lectura_insumos_excel:77 - Inicio lectura ventas_neveras_conservacion_formulas.xlsx Hoja: Informe 1
-2025-09-16 15:20:40.026 | SUCCESS  | Utils.general_functions:Lectura_insumos_excel:88 - Lectura de ventas_neveras_conservacion_formulas.xlsx,  hoja: Informe 1 realizada con éxito
-2025-09-16 15:20:40.026 | INFO     | Utils.general_functions:wrapper:15 - Tiempo de ejecución de Lectura_insumos_excel: 5.165547847747803 segundos
-2025-09-16 15:20:40.027 | INFO     | Utils.general_functions:Lectura_insumos_excel:77 - Inicio lectura ventas_neveras_conservacion_formulas.xlsx Hoja: DRIVERS
-2025-09-16 15:20:45.525 | SUCCESS  | Utils.general_functions:Lectura_insumos_excel:88 - Lectura de ventas_neveras_conservacion_formulas.xlsx,  hoja: DRIVERS realizada con éxito
-2025-09-16 15:20:45.526 | INFO     | Utils.general_functions:wrapper:15 - Tiempo de ejecución de Lectura_insumos_excel: 5.497947692871094 segundos
-2025-09-16 15:20:45.526 | SUCCESS  | Utils.DataQuality_Functions:verificar_columnas:105 - ✅ Informe 1: todas las columnas esperadas están presentes.
-2025-09-16 15:20:45.526 | SUCCESS  | Utils.DataQuality_Functions:verificar_columnas:105 - ✅ DRIVERS: todas las columnas esperadas están presentes.
-2025-09-16 15:20:45.526 | INFO     | Utils.general_functions:Lectura_insumos_excel:77 - Inicio lectura ventas_neveras_conservacion_formulas.xlsx Hoja: Informe 1
-2025-09-16 15:21:00.964 | SUCCESS  | Utils.general_functions:Lectura_insumos_excel:88 - Lectura de ventas_neveras_conservacion_formulas.xlsx,  hoja: Informe 1 realizada con éxito
-2025-09-16 15:21:00.964 | INFO     | Utils.general_functions:wrapper:15 - Tiempo de ejecución de Lectura_insumos_excel: 15.438220500946045 segundos
-2025-09-16 15:21:00.965 | INFO     | Utils.general_functions:Lectura_insumos_excel:77 - Inicio lectura ventas_neveras_conservacion_formulas.xlsx Hoja: DRIVERS
-2025-09-16 15:21:15.826 | SUCCESS  | Utils.general_functions:Lectura_insumos_excel:88 - Lectura de ventas_neveras_conservacion_formulas.xlsx,  hoja: DRIVERS realizada con éxito
-2025-09-16 15:21:15.826 | INFO     | Utils.general_functions:wrapper:15 - Tiempo de ejecución de Lectura_insumos_excel: 14.86070203781128 segundos
+2025-09-17 17:43:07.773 | INFO     | Utils.DataQuality_Functions:resolve_existing_file:79 - Archivo Consulta Diaria Ventas - Snackeros.xlsx encontrado.
+2025-09-17 17:43:07.775 | INFO     | Utils.DataQuality_Functions:resolve_existing_file:79 - Archivo Drivers.xlsx encontrado.
+2025-09-17 17:43:07.777 | INFO     | Utils.general_functions:Lectura_insumos_excel:77 - Inicio lectura Consulta Diaria Ventas - Snackeros.xlsx Hoja: Consolidado
+2025-09-17 17:43:18.814 | SUCCESS  | Utils.general_functions:Lectura_insumos_excel:88 - Lectura de Consulta Diaria Ventas - Snackeros.xlsx,  hoja: Consolidado realizada con éxito
+2025-09-17 17:43:18.815 | INFO     | Utils.general_functions:wrapper:15 - Tiempo de ejecución de Lectura_insumos_excel: 11.037341117858887 segundos
+2025-09-17 17:43:18.815 | INFO     | Utils.general_functions:Lectura_insumos_excel:77 - Inicio lectura Drivers.xlsx Hoja: DRIVERS
+2025-09-17 17:43:23.123 | SUCCESS  | Utils.general_functions:Lectura_insumos_excel:88 - Lectura de Drivers.xlsx,  hoja: DRIVERS realizada con éxito
+2025-09-17 17:43:23.123 | INFO     | Utils.general_functions:wrapper:15 - Tiempo de ejecución de Lectura_insumos_excel: 4.308155536651611 segundos
+2025-09-17 17:43:23.124 | SUCCESS  | Utils.DataQuality_Functions:verificar_columnas:105 - ✅ Consolidado: todas las columnas esperadas están presentes.
+2025-09-17 17:43:23.124 | SUCCESS  | Utils.DataQuality_Functions:verificar_columnas:105 - ✅ DRIVERS: todas las columnas esperadas están presentes.
+2025-09-17 17:43:23.125 | INFO     | Utils.general_functions:Lectura_insumos_excel:77 - Inicio lectura Consulta Diaria Ventas - Snackeros.xlsx Hoja: Consolidado
+2025-09-17 17:43:46.500 | SUCCESS  | Utils.general_functions:Lectura_insumos_excel:88 - Lectura de Consulta Diaria Ventas - Snackeros.xlsx,  hoja: Consolidado realizada con éxito
+2025-09-17 17:43:46.502 | INFO     | Utils.general_functions:wrapper:15 - Tiempo de ejecución de Lectura_insumos_excel: 23.376541137695312 segundos
+2025-09-17 17:43:46.502 | INFO     | Utils.general_functions:Lectura_insumos_excel:77 - Inicio lectura Drivers.xlsx Hoja: DRIVERS
+2025-09-17 17:44:04.941 | SUCCESS  | Utils.general_functions:Lectura_insumos_excel:88 - Lectura de Drivers.xlsx,  hoja: DRIVERS realizada con éxito
+2025-09-17 17:44:04.941 | INFO     | Utils.general_functions:wrapper:15 - Tiempo de ejecución de Lectura_insumos_excel: 18.439802408218384 segundos
+2025-09-17 17:52:27.964 | INFO     | Utils.general_functions:Lectura_insumos_excel:77 - Inicio lectura Consulta Diaria Ventas - Snackeros.xlsx Hoja: Consolidado
+2025-09-17 17:52:48.120 | SUCCESS  | Utils.general_functions:Lectura_insumos_excel:88 - Lectura de Consulta Diaria Ventas - Snackeros.xlsx,  hoja: Consolidado realizada con éxito
+2025-09-17 17:52:48.120 | INFO     | Utils.general_functions:wrapper:15 - Tiempo de ejecución de Lectura_insumos_excel: 20.155831575393677 segundos
+2025-09-17 17:52:48.120 | INFO     | Utils.general_functions:Lectura_insumos_excel:77 - Inicio lectura Drivers.xlsx Hoja: DRIVERS
+2025-09-17 17:53:09.852 | SUCCESS  | Utils.general_functions:Lectura_insumos_excel:88 - Lectura de Drivers.xlsx,  hoja: DRIVERS realizada con éxito
+2025-09-17 17:53:09.853 | INFO     | Utils.general_functions:wrapper:15 - Tiempo de ejecución de Lectura_insumos_excel: 21.733200311660767 segundos
+2025-09-17 17:54:40.841 | INFO     | Utils.general_functions:Lectura_insumos_excel:77 - Inicio lectura Consulta Diaria Ventas - Snackeros.xlsx Hoja: Consolidado
+2025-09-17 17:55:01.910 | SUCCESS  | Utils.general_functions:Lectura_insumos_excel:88 - Lectura de Consulta Diaria Ventas - Snackeros.xlsx,  hoja: Consolidado realizada con éxito
+2025-09-17 17:55:01.912 | INFO     | Utils.general_functions:wrapper:15 - Tiempo de ejecución de Lectura_insumos_excel: 21.070975065231323 segundos
+2025-09-17 17:55:01.912 | INFO     | Utils.general_functions:Lectura_insumos_excel:77 - Inicio lectura Drivers.xlsx Hoja: DRIVERS
+2025-09-17 17:55:28.529 | SUCCESS  | Utils.general_functions:Lectura_insumos_excel:88 - Lectura de Drivers.xlsx,  hoja: DRIVERS realizada con éxito
+2025-09-17 17:55:28.530 | INFO     | Utils.general_functions:wrapper:15 - Tiempo de ejecución de Lectura_insumos_excel: 26.61814570426941 segundos
+2025-09-17 18:01:51.511 | INFO     | Utils.general_functions:Lectura_insumos_excel:77 - Inicio lectura Consulta Diaria Ventas - Snackeros.xlsx Hoja: Consolidado
+2025-09-17 18:02:16.920 | SUCCESS  | Utils.general_functions:Lectura_insumos_excel:88 - Lectura de Consulta Diaria Ventas - Snackeros.xlsx,  hoja: Consolidado realizada con éxito
+2025-09-17 18:02:16.920 | INFO     | Utils.general_functions:wrapper:15 - Tiempo de ejecución de Lectura_insumos_excel: 25.409482955932617 segundos
+2025-09-17 18:02:16.921 | INFO     | Utils.general_functions:Lectura_insumos_excel:77 - Inicio lectura Drivers.xlsx Hoja: DRIVERS
+2025-09-17 18:02:42.852 | SUCCESS  | Utils.general_functions:Lectura_insumos_excel:88 - Lectura de Drivers.xlsx,  hoja: DRIVERS realizada con éxito
+2025-09-17 18:02:42.853 | INFO     | Utils.general_functions:wrapper:15 - Tiempo de ejecución de Lectura_insumos_excel: 25.931848287582397 segundos

@@ -11,7 +11,9 @@ class VerificadorCodigos:
     TIPO_ATENCION = "I"
     COD_HASH = "#"
     RESULTADO_OK = "OK"
-    RESULTADO_SIN_COD = "SIN COD AC"
+    RESULTADO_SIN_COD_CORREGIDO = "SIN COD AC CORREGIDO"
+    RESULTADO_SIN_COD_AC = "SIN COD AC"
+    SIN_ASIGNAR = "Sin asignar"
     
     def __init__(
         self,
@@ -61,7 +63,7 @@ class VerificadorCodigos:
         mask_lookup = mask_tipo_I & (~mask_hash)                            
 
         
-        serie_status.loc[mask_tipo_I & mask_hash] = self.RESULTADO_SIN_COD        
+        serie_status.loc[mask_tipo_I & mask_hash] = self.RESULTADO_SIN_COD_CORREGIDO        
    
         serie_status.loc[mask_lookup] = (
             self.df_vtas.loc[mask_lookup, col_g]
@@ -155,7 +157,7 @@ class VerificadorCodigos:
 
         # condición: tipo_venta == "I" y agente_comercial == "Sin asignar"
         mask = (self.df_vtas[col_tipo] == self.TIPO_ATENCION) & \
-            (self.df_vtas[col_agente_nombre] == self.RESULTADO_SIN_COD)
+            (self.df_vtas[col_agente_nombre] == self.SIN_ASIGNAR)
 
         mapa = dict(zip(self.df_drivers[drv_key], self.df_drivers[drv_val]))
 
@@ -165,3 +167,4 @@ class VerificadorCodigos:
             .fillna(self.df_vtas.loc[mask, fb_col])
         )
         return res
+

@@ -1,15 +1,10 @@
-
-
 # Configuración base de la aplicación.
-
-cnf_mensajes:
-  msg_base1: ""
-
 config_insumos:
   path_insumos: "Insumos/"
-  nom_base: "ventas_neveras_conservacion_formulas.xlsx"
+
   base_vtas: 
-    nom_hoja_vtas: "Informe 1"
+    nom_base: "Consulta Diaria Ventas - Snackeros.xlsx"
+    nom_hoja: "Consolidado"
     cols_vtas: &cols_vtas
       anio_mes: "Año/Mes"
       tipo_venta: "Tipo de Venta"
@@ -22,12 +17,10 @@ config_insumos:
       venta_dinero: "Venta $"
       venta_kg: "Venta KG"
       venta_un: "Venta UN"
-      status: "STATUS"
-      cod_ecom_final: "COD ECOM FINAL"
-      cod_ac_final: "COD AC FINAL"
-      nombre_ac_final: "NOMBRE AC FINAL"
-  drivers: 
-    nom_hoja_driver: DRIVERS
+
+  drivers:
+    nom_base: "Drivers.xlsx"    
+    nom_hoja: "DRIVERS"
     cols_drivers: &cols_drivers
       regional: "Regional"
       cod_sap: "Cod SAP"
@@ -41,11 +34,13 @@ config_insumos:
       cod_cliente_alt: "Cod Cliente.1"
       concat: "CONCAT"
 
-
 dict_cols:
   cols_ventas: *cols_vtas
   cols_drivers: *cols_drivers
-  
+  status: "STATUS"
+  cod_ecom_final: "COD ECOM FINAL"
+  cod_ac_final: "COD AC FINAL"
+  nombre_ac_final: "NOMBRE AC FINAL"
 
 Resultados:
   path_resultado: "Resultados\\"
