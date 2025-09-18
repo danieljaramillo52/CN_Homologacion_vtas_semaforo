@@ -1,2 +1,4 @@
 # Parámetros editables usuario. 
-dict_editable : {}
+config_insumos:
+  base_vtas:
+    nom_base: "editable_nom_base.xlsx"

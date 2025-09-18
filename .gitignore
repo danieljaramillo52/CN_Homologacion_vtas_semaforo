@@ -1,5 +1,5 @@
 Insumos/
-__pycache__/
+**__pycache__/
 .vscode/
 *.xlsx
 *.csv

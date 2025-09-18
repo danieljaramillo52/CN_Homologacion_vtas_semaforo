@@ -26,6 +26,23 @@ class ConfigLoader:
             logger.warning(f"No se encontró archivo de configuración editable en: {path}. Se usará solo la configuración base.")
             return {}
 
+    def deep_update(base: dict, overrides: dict) -> dict:
+        """
+        Combina recursivamente dos diccionarios.
+        Los valores de 'overrides' tienen prioridad.
+        """
+        result = base.copy()
+        for k, v in overrides.items():
+            if (
+                k in result
+                and isinstance(result[k], dict)
+                and isinstance(v, dict)
+            ):
+                result[k] = ConfigLoader.deep_update(result[k], v)
+            else:
+                result[k] = v
+        return result
+
     def _combinar_configuraciones(self) -> dict:
         """
         Combina la configuración interna y editable.
@@ -36,7 +53,7 @@ class ConfigLoader:
         """
         cng_interna_copy = self._config_interna.copy()
         if self._config_usuario:
-            cng_interna_copy.update(self._config_usuario)
+            cng_interna_copy = ConfigLoader.deep_update(cng_interna_copy, self._config_usuario)
             return cng_interna_copy
         return self._config_interna
 
