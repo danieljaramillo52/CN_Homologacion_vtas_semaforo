@@ -62,27 +62,21 @@ class Aplicacion:
             path_drivers=path_drivers
         )
         
+        # Extraer del dict de columnas cols de vtas
+        cols_vtas = dict_cols["cols_ventas"]
         # Transformaciones
         verificador = VerificadorCodigos(
             df_vtas=df_vtas,
             df_drivers=df_drivers,
-            cols_vtas=dict_cols["cols_ventas"],
+            cols_vtas=cols_vtas,
             cols_drivers=dict_cols["cols_drivers"]
         )
         
         df_vtas["status"] = verificador.create_col_status()
-        df_vtas[dict_cols["cols_ventas"]["codigo_ecom"]] = verificador.create_col_cod_cliente_alt()
-        df_vtas[dict_cols["cols_ventas"]["agente_comercial_clave"]] = verificador.create_col_agente_resuelta(driver_val="cod", fallback="clave")
-        df_vtas[dict_cols["cols_ventas"]["agente_comercial"]] = verificador.create_col_agente_resuelta(driver_val="nombre", fallback="nombre")
-        
-        mask_corregir_status = (
-            (df_vtas[dict_cols["cols_ventas"]["tipo_venta"]] == "I") &
-            (df_vtas[dict_cols["cols_ventas"]["agente_comercial"]] == "Sin asignar") &
-            (df_vtas["status"] == "SIN COD AC CORREGIDO")
-        )
-
-        df_vtas.loc[mask_corregir_status, "status"] = "SIN COD AC"
-
+        df_vtas[cols_vtas["codigo_ecom"]] = verificador.create_col_cod_cliente_alt()
+        df_vtas[cols_vtas["agente_comercial_clave"]] = verificador.create_col_agente_resuelta(driver_val="cod", fallback="clave")
+        df_vtas[cols_vtas["agente_comercial"]] = verificador.create_col_agente_resuelta(driver_val="nombre", fallback="nombre")
+        df_vtas["status"]  = verificador.corregir_status_sin_cod_ac() 
         
         # Exportar resultado
         out_dir = ensure_dir(base_dir=cfg_result["path_resultado"])

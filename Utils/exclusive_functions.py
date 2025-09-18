@@ -1,5 +1,6 @@
 import pandas as pd
 from typing import Dict, Literal
+from types import SimpleNamespace
 from loguru import logger
 
 
@@ -26,96 +27,81 @@ class VerificadorCodigos:
         Inicializa el verificador con los DataFrames y sus mapeos de columnas.
 
         Args:
-            df_vtas: DataFrame de ventas.
-            df_drivers: DataFrame de drivers.
-            cols_vtas: Diccionario con alias -> nombre real de columnas de ventas.
-            cols_drivers: Diccionario con alias -> nombre real de columnas de drivers.
+            df_vtas (pd.DataFrame): DataFrame de ventas.
+            df_drivers (pd.DataFrame): DataFrame de drivers.
+            cols_vtas (Dict[str, str]): Alias -> nombre real de columnas de ventas.
+            cols_drivers (Dict[str, str]): Alias -> nombre real de columnas de drivers.
         """
-        
         self.df_vtas = df_vtas
         self.df_drivers = df_drivers
         self.cols_vtas = cols_vtas
         self.cols_drivers = cols_drivers
+
+        # Accesores por punto (azúcar sintáctico). No cambia la lógica de los diccionarios.
+        self.V = SimpleNamespace(**cols_vtas)
+        self.D = SimpleNamespace(**cols_drivers)
+
+        # Mapa usado por create_col_status (Cod SAP -> Cambio Cod ECOM a CRM)
         self.mapa_drivers = self._crear_mapa()
 
     def _crear_mapa(self) -> Dict[str, str]:
-        """Mapea Cod SAP -> Cambio Cod ECOM a CRM"""
-        
-        key = self.cols_drivers["cod_sap"]                 
-        val = self.cols_drivers["cambio_cod_ecom_crm"]     
-        
-        return dict(zip(self.df_drivers[key], self.df_drivers[val]))
+        """Mapea Cod SAP -> Cambio Cod ECOM a CRM."""
+        return dict(zip(
+            self.df_drivers[self.D.cod_sap],
+            self.df_drivers[self.D.cambio_cod_ecom_crm]
+        ))
 
     def create_col_status(self) -> pd.Series:
         """
         - Si Tipo de Venta ≠ "I" → "OK".
-        - Si Tipo de Venta = "I" y Agente Comercial - Clave = "#" → "SIN COD AC".
-        - Si Tipo de Venta = "I" y Agente Comercial - Clave ≠ "#" → BUSCARV en drivers; si no existe → "OK".
-        """
-        col_tipo = self.cols_vtas["tipo_venta"]                
-        col_g    = self.cols_vtas["agente_comercial_clave"]    
+        - Si Tipo de Venta = "I" y Agente Comercial - Clave = "#" → "SIN COD AC CORREGIDO".
+        - Si Tipo de Venta = "I" y Agente Comercial - Clave ≠ "#" → lookup en drivers; si no existe → "OK".
 
-       
+        Returns:
+            pd.Series: Serie 'status' calculada.
+        """
         serie_status = pd.Series(self.RESULTADO_OK, index=self.df_vtas.index)
 
-        mask_tipo_I = self.df_vtas[col_tipo] == self.TIPO_ATENCION      
-        mask_hash   = self.df_vtas[col_g]   == self.COD_HASH   
-        mask_lookup = mask_tipo_I & (~mask_hash)                            
+        mask_tipo_I = self.df_vtas[self.V.tipo_venta] == self.TIPO_ATENCION
+        mask_hash   = self.df_vtas[self.V.agente_comercial_clave] == self.COD_HASH
+        mask_lookup = mask_tipo_I & (~mask_hash)
 
-        
-        serie_status.loc[mask_tipo_I & mask_hash] = self.RESULTADO_SIN_COD_CORREGIDO        
-   
+        serie_status.loc[mask_tipo_I & mask_hash] = self.RESULTADO_SIN_COD_CORREGIDO
         serie_status.loc[mask_lookup] = (
-            self.df_vtas.loc[mask_lookup, col_g]
-            .map(self.mapa_drivers)       
+            self.df_vtas.loc[mask_lookup, self.V.agente_comercial_clave]
+            .map(self.mapa_drivers)
             .fillna(self.RESULTADO_OK)
         )
-
         return serie_status
-
-
 
     def create_col_cod_cliente_alt(self, literal_if_false: bool = False) -> pd.Series:
         """
-        Calcula (vectorizado) un código a partir de ventas y drivers.
+        Calcula código alterno:
+        - Si tipo_venta == TIPO_ATENCION → mapear cliente_clave (cod_actual → cod_cliente_alt),
+          si no hay match → codigo_ecom.
+        - Si no es TIPO_ATENCION → devuelve False si literal_if_false=True, de lo contrario codigo_ecom.
 
-        Reglas:
-        - Si tipo_venta == self.TIPO_ATENCION: mapear cliente_clave usando drivers
-        (cod_actual -> cod_cliente_alt); si no hay match, usar codigo_ecom.
-        - Si no: devolver False si literal_if_false=True, de lo contrario codigo_ecom.
+        Args:
+            literal_if_false (bool): Controla el valor cuando no aplica la regla.
 
-        Parámetros:
-        - literal_if_false (bool): controla el valor cuando no aplica la regla.
-
-        Retorna:
-        - pd.Series alineada a df_vtas.
+        Returns:
+            pd.Series: Serie con el código calculado.
         """
-
-        # Columnas reales desde la config
-        col_tipo   = self.cols_vtas["tipo_venta"]       
-        col_key_D  = self.cols_vtas["cliente_clave"]     
-        codigo_ecom      = self.cols_vtas["codigo_ecom"]       
-
-        cod_actual  = self.cols_drivers["cod_actual"]     
-        cod_cliente_alt  = self.cols_drivers["cod_cliente_alt"]
-
-        mapa_hk = dict(zip(self.df_drivers[cod_actual], self.df_drivers[cod_cliente_alt]))
-
-        
         res = (pd.Series(False, index=self.df_vtas.index)
-            if literal_if_false else self.df_vtas[codigo_ecom].copy())
+               if literal_if_false else self.df_vtas[self.V.codigo_ecom].copy())
 
-        
-        mask_tipo_I = (self.df_vtas[col_tipo] == self.TIPO_ATENCION)  
+        mapa_hk = dict(zip(
+            self.df_drivers[self.D.cod_actual],
+            self.df_drivers[self.D.cod_cliente_alt]
+        ))
+        mask_tipo_I = (self.df_vtas[self.V.tipo_venta] == self.TIPO_ATENCION)
 
         res.loc[mask_tipo_I] = (
-            self.df_vtas.loc[mask_tipo_I, col_key_D]
-            .map(mapa_hk)                                  
-            .fillna(self.df_vtas.loc[mask_tipo_I, codigo_ecom])  
+            self.df_vtas.loc[mask_tipo_I, self.V.cliente_clave]
+            .map(mapa_hk)
+            .fillna(self.df_vtas.loc[mask_tipo_I, self.V.codigo_ecom])
         )
-
         return res
-    
 
     def create_col_agente_resuelta(
         self,
@@ -123,48 +109,54 @@ class VerificadorCodigos:
         fallback:   Literal["clave", "nombre"] = "clave",
     ) -> pd.Series:
         """
-        Devuelve una serie calculada:
-        - Por defecto: columna de agente (clave o nombre) según `fallback`.
+        Devuelve el agente resuelto:
+        - Por defecto: usa ventas[agente_comercial_clave|agente_comercial] según `fallback`.
         - Si tipo_venta == TIPO_ATENCION y agente_comercial == "Sin asignar":
-            hace lookup por cliente_clave en drivers (cod_actual -> cod/jefe según `driver_val`);
-            si no hay match, conserva el fallback.
+          hace lookup por cliente_clave (cod_actual → cod_jefe_ventas/jefe_ventas).
 
         Args:
-        driver_val: "cod"    → usa drivers["cod_jefe_ventas"] 
-                    "nombre" → usa drivers["jefe_ventas"] 
-        fallback:   "clave"  → usa ventas["agente_comercial_clave"] 
-                    "nombre" → usa ventas["agente_comercial"] 
+            driver_val (Literal["cod","nombre"]): Valor de drivers a usar.
+            fallback (Literal["clave","nombre"]): Columna de ventas por defecto.
+
+        Returns:
+            pd.Series: Serie con el agente resuelto.
         """
-        # columnas ventas (reales desde config)
-        col_tipo          = self.cols_vtas["tipo_venta"]
-        col_agente_nombre = self.cols_vtas["agente_comercial"]
-        col_agente_clave  = self.cols_vtas["agente_comercial_clave"]
-        col_cliente_clave = self.cols_vtas["cliente_clave"]
-
-        
-        drv_key = self.cols_drivers["cod_actual"]
-        
-        if driver_val == "cod":
-            drv_val = self.cols_drivers["cod_jefe_ventas"]  
-        else:
-            drv_val = self.cols_drivers["jefe_ventas"]   
-        
-        # fallback en ventas
-        fb_col = col_agente_clave if fallback == "clave" else col_agente_nombre
-
-        # valor por defecto
+        fb_col = self.V.agente_comercial_clave if fallback == "clave" else self.V.agente_comercial
         res = self.df_vtas[fb_col].copy()
 
-        # condición: tipo_venta == "I" y agente_comercial == "Sin asignar"
-        mask = (self.df_vtas[col_tipo] == self.TIPO_ATENCION) & \
-            (self.df_vtas[col_agente_nombre] == self.SIN_ASIGNAR)
+        mask = (
+            (self.df_vtas[self.V.tipo_venta] == self.TIPO_ATENCION) &
+            (self.df_vtas[self.V.agente_comercial] == self.SIN_ASIGNAR)
+        )
 
-        mapa = dict(zip(self.df_drivers[drv_key], self.df_drivers[drv_val]))
+        drv_val = self.D.cod_jefe_ventas if driver_val == "cod" else self.D.jefe_ventas
+        mapa = dict(zip(self.df_drivers[self.D.cod_actual], self.df_drivers[drv_val]))
 
         res.loc[mask] = (
-            self.df_vtas.loc[mask, col_cliente_clave]
+            self.df_vtas.loc[mask, self.V.cliente_clave]
             .map(mapa)
             .fillna(self.df_vtas.loc[mask, fb_col])
         )
         return res
+
+    def corregir_status_sin_cod_ac(self, status_col: str = "status") -> pd.Series:
+        """
+        Si tipo_venta == TIPO_ATENCION, agente_comercial == SIN_ASIGNAR y
+        status == RESULTADO_SIN_COD_CORREGIDO, entonces status ← RESULTADO_SIN_COD_AC.
+
+        Args:
+            status_col (str): Nombre de la columna de estado a actualizar.
+
+        Returns:
+            pd.Series: Serie 'status' actualizada.
+        """
+        mask = (
+            (self.df_vtas[self.V.tipo_venta] == self.TIPO_ATENCION) &
+            (self.df_vtas[self.V.agente_comercial] == self.SIN_ASIGNAR) &
+            (self.df_vtas[status_col] == self.RESULTADO_SIN_COD_CORREGIDO)
+        )
+        self.df_vtas.loc[mask, status_col] = self.RESULTADO_SIN_COD_AC
+        return self.df_vtas[status_col]
+
+
 
