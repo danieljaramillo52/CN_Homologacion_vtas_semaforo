@@ -1,4 +1,4 @@
 # Parámetros editables usuario. 
 config_insumos:
   base_vtas:
-    nom_base: "editable_nom_base.xlsx"
+    nom_base: ["Consulta Diaria Ventas - Snackeros.xlsx", "Consulta Diaria Ventas - Neveras.xlsx"]

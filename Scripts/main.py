@@ -8,7 +8,7 @@ from Scripts.procesar_insumos import ProcesarInsumos
 
 
 class Aplicacion:
-    """Orquesta el flujo principal con etapas: 'carga' → 'listo' → 'filtrar'."""
+    """Orquesta el flujo principal de la aplicación'."""
 
     def __init__(self) -> None:
         self.config_loader = ConfigLoader()
@@ -28,61 +28,62 @@ class Aplicacion:
         path_insumos = ensure_dir(base_dir=config_insumos["path_insumos"])
     
         # Archivos independientes
-        path_vtas = resolve_existing_file(
-            base_dir=path_insumos,
-            filename=config_insumos["base_vtas"]["nom_base"]       
-        )
-        path_drivers = resolve_existing_file(
-            base_dir=path_insumos,
-            filename=config_insumos["drivers"]["nom_base"])
+        for cada_archivo in config_insumos["base_vtas"]["nom_base"]:
+            path_vtas = resolve_existing_file(
+                base_dir=path_insumos,
+                filename=cada_archivo       
+            )
+            path_drivers = resolve_existing_file(
+                base_dir=path_insumos,
+                filename=config_insumos["drivers"]["nom_base"])
 
-        # Verificar insumos (carga mínima)
-        procesador_insumos = ProcesarInsumos(config_insumos=config_insumos, dict_cols=dict_cols)
-        
-        base_vtas_min, drivers_min = procesador_insumos.carga_minima(
-            path_vtas=path_vtas, 
-            path_drivers=path_drivers
-        )
-        
-        # Validación de columnas esperadas
-        verificar_columnas(
-            df=base_vtas_min,
-            columnas_esperadas=dict_cols["cols_ventas"],
-            nombre=config_insumos["base_vtas"]["nom_hoja"]
-        )
-        verificar_columnas(
-            df=drivers_min,
-            columnas_esperadas=dict_cols["cols_drivers"],
-            nombre=config_insumos["drivers"]["nom_hoja"]
-        )
-        
-        # Carga completa (misma lógica/resultado que antes)
-        df_vtas, df_drivers = procesador_insumos.carga_completa(
-            path_vtas=path_vtas, 
-            path_drivers=path_drivers
-        )
-        
-        # Extraer del dict de columnas cols de vtas
-        cols_vtas = dict_cols["cols_ventas"]
-        # Transformaciones
-        verificador = VerificadorCodigos(
-            df_vtas=df_vtas,
-            df_drivers=df_drivers,
-            cols_vtas=cols_vtas,
-            cols_drivers=dict_cols["cols_drivers"]
-        )
-        
-        df_vtas["status"] = verificador.create_col_status()
-        df_vtas[cols_vtas["codigo_ecom"]] = verificador.create_col_cod_cliente_alt()
-        df_vtas[cols_vtas["agente_comercial_clave"]] = verificador.create_col_agente_resuelta(driver_val="cod", fallback="clave")
-        df_vtas[cols_vtas["agente_comercial"]] = verificador.create_col_agente_resuelta(driver_val="nombre", fallback="nombre")
-        df_vtas["status"]  = verificador.corregir_status_sin_cod_ac() 
-        
-        # Exportar resultado
-        out_dir = ensure_dir(base_dir=cfg_result["path_resultado"])
-        out_path = os.path.join(out_dir, "homologación_vtas.xlsx")
-        logger.info(f"Exportando resultado → {out_path}")
-        df_vtas.to_excel(out_path, index=False)
+            # Verificar insumos (carga mínima)
+            procesador_insumos = ProcesarInsumos(config_insumos=config_insumos, dict_cols=dict_cols)
+            
+            base_vtas_min, drivers_min = procesador_insumos.carga_minima(
+                path_vtas=path_vtas, 
+                path_drivers=path_drivers
+            )
+            
+            # Validación de columnas esperadas
+            verificar_columnas(
+                df=base_vtas_min,
+                columnas_esperadas=dict_cols["cols_ventas"],
+                nombre=config_insumos["base_vtas"]["nom_hoja"]
+            )
+            verificar_columnas(
+                df=drivers_min,
+                columnas_esperadas=dict_cols["cols_drivers"],
+                nombre=config_insumos["drivers"]["nom_hoja"]
+            )
+            
+            # Carga completa (misma lógica/resultado que antes)
+            df_vtas, df_drivers = procesador_insumos.carga_completa(
+                path_vtas=path_vtas, 
+                path_drivers=path_drivers
+            )
+            
+            # Extraer del dict de columnas cols de vtas
+            cols_vtas = dict_cols["cols_ventas"]
+            # Transformaciones
+            verificador = VerificadorCodigos(
+                df_vtas=df_vtas,
+                df_drivers=df_drivers,
+                cols_vtas=cols_vtas,
+                cols_drivers=dict_cols["cols_drivers"]
+            )
+            
+            df_vtas["status"] = verificador.create_col_status()
+            df_vtas[cols_vtas["codigo_ecom"]] = verificador.create_col_cod_cliente_alt()
+            df_vtas[cols_vtas["agente_comercial_clave"]] = verificador.create_col_agente_resuelta(driver_val="cod", fallback="clave")
+            df_vtas[cols_vtas["agente_comercial"]] = verificador.create_col_agente_resuelta(driver_val="nombre", fallback="nombre")
+            df_vtas["status"]  = verificador.corregir_status_sin_cod_ac() 
+            
+            # Exportar resultado
+            out_dir = ensure_dir(base_dir=cfg_result["path_resultado"])
+            out_path = os.path.join(out_dir, f'{cada_archivo}_resultado.xlsx')
+            logger.info(f"Exportando resultado → {out_path}")
+            df_vtas.to_excel(out_path, index=False)
         
 
 if __name__ == "__main__":

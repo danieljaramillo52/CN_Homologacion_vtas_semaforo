@@ -37,7 +37,7 @@ class VerificadorCodigos:
         self.cols_vtas = cols_vtas
         self.cols_drivers = cols_drivers
 
-        # Accesores por punto (azúcar sintáctico). No cambia la lógica de los diccionarios.
+        # Accesores por punto. No cambia la lógica de los diccionarios.
         self.V = SimpleNamespace(**cols_vtas)
         self.D = SimpleNamespace(**cols_drivers)
 
@@ -157,6 +157,5 @@ class VerificadorCodigos:
         )
         self.df_vtas.loc[mask, status_col] = self.RESULTADO_SIN_COD_AC
         return self.df_vtas[status_col]
-
 
 

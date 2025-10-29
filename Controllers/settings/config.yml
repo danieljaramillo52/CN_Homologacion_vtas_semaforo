@@ -3,7 +3,7 @@ config_insumos:
   path_insumos: "Insumos/"
 
   base_vtas: 
-    nom_base: "Consulta Diaria Ventas - Snackeros.xlsx"
+    nom_base: ["Consulta Diaria Ventas - Snackeros.xlsx", "ventas_neveras_conservacion_formulas.xlsx"]
     nom_hoja: "Consolidado"
     cols_vtas: &cols_vtas
       anio_mes: "Año/Mes"
@@ -44,4 +44,3 @@ dict_cols:
 
 Resultados:
   path_resultado: "Resultados\\"
-

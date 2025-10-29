@@ -1,25 +1,11 @@
-2025-09-18 11:16:00.854 | CRITICAL | Utils.DataQuality_Functions:wrapper:31 - Archivo no encontrado: Consulta Diaria Ventas - Neveras.xlsx en C:\Users\DanielJaramilloBusta\OneDrive - XPERTGROUP S.A.S\Staff_CN\Proyectos_CN\Proyecto_homologación_vtas_semáforo\Insumos
-Traceback (most recent call last):
-
-  File "c:\Users\DanielJaramilloBusta\OneDrive - XPERTGROUP S.A.S\Staff_CN\Proyectos_CN\Proyecto_homologación_vtas_semáforo\Scripts\main.py", line 90, in <module>
-    app.main()
-    │   └ <function Aplicacion.main at 0x0000020083FD4EA0>
-    └ <__main__.Aplicacion object at 0x00000200F11DFA10>
-
-  File "c:\Users\DanielJaramilloBusta\OneDrive - XPERTGROUP S.A.S\Staff_CN\Proyectos_CN\Proyecto_homologación_vtas_semáforo\Scripts\main.py", line 31, in main
-    path_vtas = resolve_existing_file(
-                └ <function resolve_existing_file at 0x0000020083FD4900>
-
-> File "c:\Users\DanielJaramilloBusta\OneDrive - XPERTGROUP S.A.S\Staff_CN\Proyectos_CN\Proyecto_homologación_vtas_semáforo\Utils\DataQuality_Functions.py", line 25, in wrapper
-    return func(*args, **kwargs)
-           │     │       └ {'base_dir': WindowsPath('C:/Users/DanielJaramilloBusta/OneDrive - XPERTGROUP S.A.S/Staff_CN/Proyectos_CN/Proyecto_homologaci...
-           │     └ ()
-           └ <function resolve_existing_file at 0x0000020083FD4860>
-
-  File "c:\Users\DanielJaramilloBusta\OneDrive - XPERTGROUP S.A.S\Staff_CN\Proyectos_CN\Proyecto_homologación_vtas_semáforo\Utils\DataQuality_Functions.py", line 78, in resolve_existing_file
-    raise FileNotFoundError(f"{file_path.name} en {base_dir}")
-                               │         │         └ WindowsPath('C:/Users/DanielJaramilloBusta/OneDrive - XPERTGROUP S.A.S/Staff_CN/Proyectos_CN/Proyecto_homologación_vtas_semáf...
-                               │         └ <property object at 0x00000200F35FB010>
-                               └ WindowsPath('C:/Users/DanielJaramilloBusta/OneDrive - XPERTGROUP S.A.S/Staff_CN/Proyectos_CN/Proyecto_homologación_vtas_semáf...
-
-FileNotFoundError: Consulta Diaria Ventas - Neveras.xlsx en C:\Users\DanielJaramilloBusta\OneDrive - XPERTGROUP S.A.S\Staff_CN\Proyectos_CN\Proyecto_homologación_vtas_semáforo\Insumos
+2025-10-29 16:15:49.883 | INFO     | Utils.DataQuality_Functions:resolve_existing_file:79 - Archivo Consulta Diaria Ventas - Snackeros.xlsx encontrado.
+2025-10-29 16:15:49.891 | INFO     | Utils.DataQuality_Functions:resolve_existing_file:79 - Archivo Drivers.xlsx encontrado.
+2025-10-29 16:15:49.895 | INFO     | Utils.general_functions:Lectura_insumos_excel:77 - Inicio lectura Consulta Diaria Ventas - Snackeros.xlsx Hoja: Consolidado
+2025-10-29 16:16:03.285 | SUCCESS  | Utils.general_functions:Lectura_insumos_excel:88 - Lectura de Consulta Diaria Ventas - Snackeros.xlsx,  hoja: Consolidado realizada con éxito
+2025-10-29 16:16:03.285 | INFO     | Utils.general_functions:wrapper:15 - Tiempo de ejecución de Lectura_insumos_excel: 13.390276908874512 segundos
+2025-10-29 16:16:03.286 | INFO     | Utils.general_functions:Lectura_insumos_excel:77 - Inicio lectura Drivers.xlsx Hoja: DRIVERS
+2025-10-29 16:16:12.559 | SUCCESS  | Utils.general_functions:Lectura_insumos_excel:88 - Lectura de Drivers.xlsx,  hoja: DRIVERS realizada con éxito
+2025-10-29 16:16:12.560 | INFO     | Utils.general_functions:wrapper:15 - Tiempo de ejecución de Lectura_insumos_excel: 9.274151802062988 segundos
+2025-10-29 16:16:12.560 | SUCCESS  | Utils.DataQuality_Functions:verificar_columnas:105 - ✅ Consolidado: todas las columnas esperadas están presentes.
+2025-10-29 16:16:12.561 | SUCCESS  | Utils.DataQuality_Functions:verificar_columnas:105 - ✅ DRIVERS: todas las columnas esperadas están presentes.
+2025-10-29 16:16:12.561 | INFO     | Utils.general_functions:Lectura_insumos_excel:77 - Inicio lectura Consulta Diaria Ventas - Snackeros.xlsx Hoja: Consolidado
