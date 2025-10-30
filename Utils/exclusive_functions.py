@@ -15,6 +15,7 @@ class VerificadorCodigos:
     RESULTADO_SIN_COD_CORREGIDO = "SIN COD AC CORREGIDO"
     RESULTADO_SIN_COD_AC = "SIN COD AC"
     SIN_ASIGNAR = "Sin asignar"
+    COLS_CAMBIAR_TYPE = ["Venta $",	"Venta KG",	"Venta UN"]
     
     def __init__(
         self,
@@ -157,5 +158,35 @@ class VerificadorCodigos:
         )
         self.df_vtas.loc[mask, status_col] = self.RESULTADO_SIN_COD_AC
         return self.df_vtas[status_col]
+    
+    def cambiar_tipo_dato_multiples_columnas_pd(self,
+        base: pd.DataFrame, type_data: type, list_columns: list = COLS_CAMBIAR_TYPE
+    ) -> pd.DataFrame:
+        """
+        Función que toma un DataFrame, una lista de sus columnas para hacer un cambio en el tipo de dato de las mismas.
 
+        Args:
+            base (pd.DataFrame): DataFrame que es la base del cambio.
+            list_columns (list): Columnas a modificar su tipo de dato.
+            type_data (type): Tipo de dato al que se cambiarán las columnas (ejemplo: str, int, float).
 
+        Returns:
+            pd.DataFrame: Copia del DataFrame con los cambios.
+        """
+        try:
+            # Verificar que el DataFrame tenga las columnas especificadas
+            for columna in list_columns:
+                if columna not in base.columns:
+                    raise KeyError(f"La columna '{columna}' no existe en el DataFrame.")
+
+            # Cambiar el tipo de dato de las columnas
+            base_copy = (
+                base.copy()
+            )  # Crear una copia para evitar problemas de SettingWithCopyWarning
+            base_copy[list_columns] = base_copy[list_columns].astype(type_data)
+
+            return base_copy
+
+        except Exception as e:
+            logger.critical(f"Error en Cambiar_tipo_dato_multiples_columnas: {e}")
+            return base

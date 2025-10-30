@@ -1,1 +1,0 @@
-# Funciones de transformación del proyecto

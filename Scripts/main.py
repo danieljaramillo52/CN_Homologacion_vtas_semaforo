@@ -72,16 +72,18 @@ class Aplicacion:
                 cols_vtas=cols_vtas,
                 cols_drivers=dict_cols["cols_drivers"]
             )
-            
-            df_vtas["status"] = verificador.create_col_status()
-            df_vtas[cols_vtas["codigo_ecom"]] = verificador.create_col_cod_cliente_alt()
-            df_vtas[cols_vtas["agente_comercial_clave"]] = verificador.create_col_agente_resuelta(driver_val="cod", fallback="clave")
-            df_vtas[cols_vtas["agente_comercial"]] = verificador.create_col_agente_resuelta(driver_val="nombre", fallback="nombre")
-            df_vtas["status"]  = verificador.corregir_status_sin_cod_ac() 
-            
+            df_vtas_copy = df_vtas.copy()
+            df_vtas_copy["status"] = verificador.create_col_status()
+            df_vtas_copy[cols_vtas["codigo_ecom"]] = verificador.create_col_cod_cliente_alt()
+            df_vtas_copy[cols_vtas["agente_comercial_clave"]] = verificador.create_col_agente_resuelta(driver_val="cod", fallback="clave")
+            df_vtas_copy[cols_vtas["agente_comercial"]] = verificador.create_col_agente_resuelta(driver_val="nombre", fallback="nombre")
+            df_vtas_copy["status"]  = verificador.corregir_status_sin_cod_ac() 
+            df_vtas_copy = verificador.cambiar_tipo_dato_multiples_columnas_pd(
+                base=df_vtas_copy, type_data=float
+            )
             # Exportar resultado
             out_dir = ensure_dir(base_dir=cfg_result["path_resultado"])
-            out_path = os.path.join(out_dir, f'{cada_archivo}_resultado.xlsx')
+            out_path = os.path.join(out_dir, f'Resultado_{cada_archivo}')
             logger.info(f"Exportando resultado → {out_path}")
             df_vtas.to_excel(out_path, index=False)
         
