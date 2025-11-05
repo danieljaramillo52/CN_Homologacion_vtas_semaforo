@@ -65,14 +65,16 @@ class Aplicacion:
             
             # Extraer del dict de columnas cols de vtas
             cols_vtas = dict_cols["cols_ventas"]
+            
+            df_vtas_copy = df_vtas.copy()
             # Transformaciones
             verificador = VerificadorCodigos(
-                df_vtas=df_vtas,
+                df_vtas=df_vtas_copy,
                 df_drivers=df_drivers,
                 cols_vtas=cols_vtas,
                 cols_drivers=dict_cols["cols_drivers"]
             )
-            df_vtas_copy = df_vtas.copy()
+            
             df_vtas_copy["status"] = verificador.create_col_status()
             df_vtas_copy[cols_vtas["codigo_ecom"]] = verificador.create_col_cod_cliente_alt()
             df_vtas_copy[cols_vtas["agente_comercial_clave"]] = verificador.create_col_agente_resuelta(driver_val="cod", fallback="clave")
@@ -83,9 +85,9 @@ class Aplicacion:
             )
             # Exportar resultado
             out_dir = ensure_dir(base_dir=cfg_result["path_resultado"])
-            out_path = os.path.join(out_dir, f'Resultado_{cada_archivo}')
+            out_path = os.path.join(out_dir, f'Homologado_{cada_archivo}')
             logger.info(f"Exportando resultado → {out_path}")
-            df_vtas.to_excel(out_path, index=False)
+            df_vtas_copy.to_excel(out_path, index=False)
         
 
 if __name__ == "__main__":

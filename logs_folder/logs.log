@@ -1,23 +1,17 @@
-2025-10-30 15:32:53.329 | INFO     | Utils.DataQuality_Functions:resolve_existing_file:79 - Archivo Consulta Diaria Ventas - Snackeros.xlsx encontrado.
-2025-10-30 15:32:53.341 | INFO     | Utils.DataQuality_Functions:resolve_existing_file:79 - Archivo Drivers.xlsx encontrado.
-2025-10-30 15:32:53.359 | INFO     | Utils.general_functions:Lectura_insumos_excel:77 - Inicio lectura Consulta Diaria Ventas - Snackeros.xlsx Hoja: Consolidado
-2025-10-30 15:33:14.652 | SUCCESS  | Utils.general_functions:Lectura_insumos_excel:88 - Lectura de Consulta Diaria Ventas - Snackeros.xlsx,  hoja: Consolidado realizada con éxito
-2025-10-30 15:33:14.653 | INFO     | Utils.general_functions:wrapper:15 - Tiempo de ejecución de Lectura_insumos_excel: 21.294524431228638 segundos
-2025-10-30 15:33:14.653 | INFO     | Utils.general_functions:Lectura_insumos_excel:77 - Inicio lectura Drivers.xlsx Hoja: DRIVERS
-2025-10-30 15:33:24.914 | SUCCESS  | Utils.general_functions:Lectura_insumos_excel:88 - Lectura de Drivers.xlsx,  hoja: DRIVERS realizada con éxito
-2025-10-30 15:33:24.915 | INFO     | Utils.general_functions:wrapper:15 - Tiempo de ejecución de Lectura_insumos_excel: 10.26139211654663 segundos
-2025-10-30 15:33:24.916 | SUCCESS  | Utils.DataQuality_Functions:verificar_columnas:105 - ✅ Consolidado: todas las columnas esperadas están presentes.
-2025-10-30 15:33:24.916 | SUCCESS  | Utils.DataQuality_Functions:verificar_columnas:105 - ✅ DRIVERS: todas las columnas esperadas están presentes.
-2025-10-30 15:33:24.918 | INFO     | Utils.general_functions:Lectura_insumos_excel:77 - Inicio lectura Consulta Diaria Ventas - Snackeros.xlsx Hoja: Consolidado
-2025-10-30 15:34:17.655 | SUCCESS  | Utils.general_functions:Lectura_insumos_excel:88 - Lectura de Consulta Diaria Ventas - Snackeros.xlsx,  hoja: Consolidado realizada con éxito
-2025-10-30 15:34:17.657 | INFO     | Utils.general_functions:wrapper:15 - Tiempo de ejecución de Lectura_insumos_excel: 52.74003863334656 segundos
-2025-10-30 15:34:17.658 | INFO     | Utils.general_functions:Lectura_insumos_excel:77 - Inicio lectura Drivers.xlsx Hoja: DRIVERS
-2025-10-30 15:35:09.193 | SUCCESS  | Utils.general_functions:Lectura_insumos_excel:88 - Lectura de Drivers.xlsx,  hoja: DRIVERS realizada con éxito
-2025-10-30 15:35:09.195 | INFO     | Utils.general_functions:wrapper:15 - Tiempo de ejecución de Lectura_insumos_excel: 51.53684997558594 segundos
-2025-10-30 15:35:25.567 | CRITICAL | Utils.exclusive_functions:cambiar_tipo_dato_multiples_columnas_pd:191 - Error en Cambiar_tipo_dato_multiples_columnas: invalid literal for int() with base 10: '0.416'
-2025-10-30 15:35:57.586 | INFO     | Utils.general_functions:Lectura_insumos_excel:77 - Inicio lectura Consulta Diaria Ventas - Snackeros.xlsx Hoja: Consolidado
-2025-10-30 15:37:01.711 | SUCCESS  | Utils.general_functions:Lectura_insumos_excel:88 - Lectura de Consulta Diaria Ventas - Snackeros.xlsx,  hoja: Consolidado realizada con éxito
-2025-10-30 15:37:01.715 | INFO     | Utils.general_functions:wrapper:15 - Tiempo de ejecución de Lectura_insumos_excel: 64.1287739276886 segundos
-2025-10-30 15:37:01.717 | INFO     | Utils.general_functions:Lectura_insumos_excel:77 - Inicio lectura Drivers.xlsx Hoja: DRIVERS
-2025-10-30 15:37:43.341 | SUCCESS  | Utils.general_functions:Lectura_insumos_excel:88 - Lectura de Drivers.xlsx,  hoja: DRIVERS realizada con éxito
-2025-10-30 15:37:43.341 | INFO     | Utils.general_functions:wrapper:15 - Tiempo de ejecución de Lectura_insumos_excel: 41.624282360076904 segundos
+2025-11-04 19:34:15.960 | INFO     | Utils.DataQuality_Functions:resolve_existing_file:79 - Archivo Consulta Diaria Ventas - Snackeros.xlsx encontrado.
+2025-11-04 19:34:15.965 | INFO     | Utils.DataQuality_Functions:resolve_existing_file:79 - Archivo Drivers.xlsx encontrado.
+2025-11-04 19:34:15.970 | INFO     | Utils.general_functions:Lectura_insumos_excel:77 - Inicio lectura Consulta Diaria Ventas - Snackeros.xlsx Hoja: Consolidado
+2025-11-04 19:34:25.541 | SUCCESS  | Utils.general_functions:Lectura_insumos_excel:88 - Lectura de Consulta Diaria Ventas - Snackeros.xlsx,  hoja: Consolidado realizada con éxito
+2025-11-04 19:34:25.541 | INFO     | Utils.general_functions:wrapper:15 - Tiempo de ejecución de Lectura_insumos_excel: 9.570553302764893 segundos
+2025-11-04 19:34:25.543 | INFO     | Utils.general_functions:Lectura_insumos_excel:77 - Inicio lectura Drivers.xlsx Hoja: DRIVERS
+2025-11-04 19:34:32.522 | SUCCESS  | Utils.general_functions:Lectura_insumos_excel:88 - Lectura de Drivers.xlsx,  hoja: DRIVERS realizada con éxito
+2025-11-04 19:34:32.523 | INFO     | Utils.general_functions:wrapper:15 - Tiempo de ejecución de Lectura_insumos_excel: 6.981614351272583 segundos
+2025-11-04 19:34:32.524 | SUCCESS  | Utils.DataQuality_Functions:verificar_columnas:105 - ✅ Consolidado: todas las columnas esperadas están presentes.
+2025-11-04 19:34:32.524 | SUCCESS  | Utils.DataQuality_Functions:verificar_columnas:105 - ✅ DRIVERS: todas las columnas esperadas están presentes.
+2025-11-04 19:34:32.525 | INFO     | Utils.general_functions:Lectura_insumos_excel:77 - Inicio lectura Consulta Diaria Ventas - Snackeros.xlsx Hoja: Consolidado
+2025-11-04 19:35:04.933 | SUCCESS  | Utils.general_functions:Lectura_insumos_excel:88 - Lectura de Consulta Diaria Ventas - Snackeros.xlsx,  hoja: Consolidado realizada con éxito
+2025-11-04 19:35:04.935 | INFO     | Utils.general_functions:wrapper:15 - Tiempo de ejecución de Lectura_insumos_excel: 32.40924286842346 segundos
+2025-11-04 19:35:04.936 | INFO     | Utils.general_functions:Lectura_insumos_excel:77 - Inicio lectura Drivers.xlsx Hoja: DRIVERS
+2025-11-04 19:35:35.925 | SUCCESS  | Utils.general_functions:Lectura_insumos_excel:88 - Lectura de Drivers.xlsx,  hoja: DRIVERS realizada con éxito
+2025-11-04 19:35:35.926 | INFO     | Utils.general_functions:wrapper:15 - Tiempo de ejecución de Lectura_insumos_excel: 30.990522861480713 segundos
+2025-11-04 19:35:37.753 | INFO     | __main__:main:89 - Exportando resultado → C:\Users\DanielJaramilloBusta\OneDrive - XPERTGROUP S.A.S\Staff_CN\Proyectos_CN\Proyecto_homologación_vtas_semáforo\Resultados\Homologado_Consulta Diaria Ventas - Snackeros.xlsx
